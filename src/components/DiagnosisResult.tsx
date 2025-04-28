@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 interface DiseaseInfo {
   id: number;
@@ -19,7 +20,7 @@ interface DiagnosisResultProps {
 }
 
 // This is just mock data - in a real app, this would come from your backend
-const getDiseaseInfo = (diseaseName: string): DiseaseInfo => {
+const getDiseaseInfo = (diseaseName: string, reportedSymptoms: string[]): DiseaseInfo => {
   const diseaseDescriptions: Record<string, { description: string, recommendations: string[] }> = {
     "Fungal infection": {
       description: "A fungal infection occurs when fungi multiply and overgrow in or on the body, often causing irritation, inflammation, or other symptoms.",
@@ -129,14 +130,14 @@ const getDiseaseInfo = (diseaseName: string): DiseaseInfo => {
   return {
     id: 0, // placeholder
     name: diseaseName,
-    symptoms: symptoms,
+    symptoms: reportedSymptoms,
     description: info.description,
     recommendations: info.recommendations
   };
 };
 
 const DiagnosisResult: React.FC<DiagnosisResultProps> = ({ diseaseName, symptoms, onReset }) => {
-  const diseaseInfo = getDiseaseInfo(diseaseName);
+  const diseaseInfo = getDiseaseInfo(diseaseName, symptoms);
 
   return (
     <div className="w-full max-w-3xl mx-auto">
@@ -157,8 +158,8 @@ const DiagnosisResult: React.FC<DiagnosisResultProps> = ({ diseaseName, symptoms
           <div className="mb-6">
             <h3 className="text-md font-semibold text-health-text mb-2">Symptoms Reported:</h3>
             <div className="flex flex-wrap gap-2">
-              {symptoms.map((symptom, index) => (
-                <Badge key={index} className="bg-health-secondary text-health-text">
+              {diseaseInfo.symptoms.map((symptom, index) => (
+                <Badge key={index} variant="secondary" className="bg-health-secondary text-health-text">
                   {symptom}
                 </Badge>
               ))}
