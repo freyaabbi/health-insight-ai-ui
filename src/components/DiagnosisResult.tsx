@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -178,11 +177,6 @@ const DiagnosisResult: React.FC<DiagnosisResultProps> = ({ diseaseName, symptoms
                 <li key={index}>{rec}</li>
               ))}
             </ul>
-          </div>
-          
-          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 text-amber-700 mt-6">
-            <p className="font-semibold">Important Note:</p>
-            <p className="text-sm">This is an AI-generated diagnosis and should not replace professional medical advice. Please consult a healthcare professional for proper evaluation.</p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between border-t pt-6">
